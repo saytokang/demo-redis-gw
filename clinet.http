@@ -1,0 +1,49 @@
+GET http://localhost:8080/keys
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/actuator/health
+
+###
+
+GET http://localhost:8080/actuator/gateway/routes
+Content-Type: application/json
+###
+
+GET http://localhost:8080/actuator/gateway/routes/provider1
+Content-Type: application/json
+
+###
+POST http://localhost:8080/gw/add
+Content-Type: application/json
+
+{
+    "id":"provider1",
+    "predicates":[
+        {
+            "name":"Path",
+            "args":{
+                "_genkey_0":"/p1/**"
+            }
+        },
+        {
+            "name":"RemoteAddr",
+            "args":{
+                "_genkey_0":"192.168.124.5/16"
+            }
+        }
+    ],
+    "filters":[
+        {
+            "name":"StripPrefix",
+            "args":{
+                "_genkey_0":"1"
+            }
+        }
+    ],
+    "uri":"lb://idc-provider1",
+    "order":0
+}
+
+###
